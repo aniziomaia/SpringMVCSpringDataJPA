@@ -29,8 +29,8 @@ public class CustomerController {
     private CustomerService customerService;
     
     @RequestMapping("/")
-    public ModelAndView home() {
-    	System.out.println("***************************CustomerController.home");
+    public ModelAndView home() {  
+    	System.out.println("*************************CustomerController.home");
         List<Cliente> listCustomer = (List<Cliente>) customerService.listAll();
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("listCustomer", listCustomer);
