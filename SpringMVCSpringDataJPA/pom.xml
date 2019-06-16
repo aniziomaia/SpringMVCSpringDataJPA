@@ -50,6 +50,7 @@
 	    <groupId>org.postgresql</groupId>
 	    <artifactId>postgresql</artifactId>
 	    <version>42.2.2</version>
+	    <scope>runtime</scope>
 	</dependency>
 	
 	<!-- And for Java Servlet, JSP and JSTL: -->
@@ -71,6 +72,7 @@
 	    <version>1.2</version>
 	</dependency>
 	
+	<!-- dependencias so spring boot -->
   </dependencies>
 
 </project>

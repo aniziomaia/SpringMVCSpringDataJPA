@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.br.vendas.model.Cliente;
-import com.br.vendas.repoisitory.CustomerService;
+import com.br.vendas.repoisitory.ClienterService;
 
 /**
  * Esta é uma classe de controlador Spring MVC típica, que é anotada com a anotação @Controller  . Você pode ver que uma instância do CustomerService  é injetada nessa classe usando a anotação @Autowired .
@@ -23,10 +23,10 @@ import com.br.vendas.repoisitory.CustomerService;
  */
  
 @Controller
-public class CustomerController {
+public class ClienteController {
     
     @Autowired
-    private CustomerService customerService;
+    private ClienterService customerService;
     
     @RequestMapping("/")
     public ModelAndView home() {  

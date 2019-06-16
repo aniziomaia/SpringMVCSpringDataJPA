@@ -26,10 +26,10 @@ import com.br.vendas.model.Cliente;
  */
 @Service
 @Transactional
-public class CustomerService {
+public class ClienterService {
 	
     @Autowired 
-    ICustomerRepository repo;
+    ICienteRepository repo;
     
     public void save(Cliente customer) {
         repo.save(customer);

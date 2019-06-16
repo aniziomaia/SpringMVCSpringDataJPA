@@ -20,7 +20,7 @@ import com.br.vendas.model.Cliente;
  *
  */
 
-public interface ICustomerRepository extends CrudRepository<Cliente, Long> {
+public interface ICienteRepository extends CrudRepository<Cliente, Long> {
      
 	@Query(value = "SELECT c FROM Cliente c WHERE c.name LIKE '%' || :keyword || '%'"
             + " OR c.email LIKE '%' || :keyword || '%'"
