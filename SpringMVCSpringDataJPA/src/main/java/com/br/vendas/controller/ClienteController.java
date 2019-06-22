@@ -1,10 +1,14 @@
 package com.br.vendas.controller;
 
 import java.util.List;
-import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,18 +42,55 @@ public class ClienteController {
     }
     
     @RequestMapping("/new")
-    public String newCustomerForm(Map<String, Object> model) {
+    public ModelAndView newCustomerForm(@ModelAttribute("customer") Cliente customer) {
     	System.out.println("***************************CustomerController.new");
-        Cliente customer = new Cliente();
-        model.put("customer", customer);
-        return "new_customer";
+        customer = new Cliente();
+        ModelAndView model = new ModelAndView("new_customer");
+        model.addObject("customer", customer);
+        return model;
     }
-    
+    //
+    //@RequestBody
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveCustomer(@ModelAttribute("customer") Cliente customer) {
+    public ModelAndView saveCustomer(@Valid @ModelAttribute("customer") Cliente customer, BindingResult result,Errors errors, ModelMap modell) {
     	System.out.println("***************************CustomerController.save");
-        customerService.save(customer);
-        return "redirect:/";
+    	try {
+    		System.out.println("***************pipoco dos grandes: " + result.getAllErrors().size());
+    		System.out.println("***************pipoco dos grandes: " + result.hasErrors());
+    		System.out.println("***************pipoco dos grandes: " + result.toString());
+    		System.out.println("***************pipoco dos grandes: " +customer.getName().isEmpty());
+    		//System.out.println("***************pipoco dos grandes: " + customer.getName().isBlank());
+    		System.out.println("***************pipoco dos grandes: " + customer.getName());
+    		
+    		//validacao manual
+    		if(customer != null) {
+    			System.out.println(">>>>>>>>>>>teste de retorno result.hasErrors: " + result.hasErrors()); 
+    			System.out.println(">>>>>>>>>>>teste de retorno errors.hasErrors: " + errors.hasErrors()); 
+    			if(customer.getName().isEmpty())
+    				result.rejectValue("name","error.order.sell.tomanyitems","The field name not be empty.");
+    			if(customer.getEmail().isEmpty())
+    				result.rejectValue("email","error.order.sell.tomanyitems","The field email not be empty.");
+    			if(customer.getAddress().isEmpty())
+    				result.rejectValue("address","error.order.sell.tomanyitems","The field address not be empty.");
+    			 
+    			ModelAndView model = new ModelAndView("new_customer");
+	    		 return model;
+    		}
+    		
+    		if(result.hasErrors()) {
+	    		 System.out.println("***************************CustomerController.if");
+	    		 ModelAndView model = new ModelAndView("new_customer");
+	    		 return model;
+	    		 //return newCustomerForm(customer);
+    	    }
+    		customerService.save(customer);
+    		//modell.addAttribute("success", "Employee " + employee.getName() + " registered successfully"); 
+    	}catch(Exception e) {
+    		
+    		e.printStackTrace();
+    	}
+    	return null;
+        //return "redirect:/";
     }
     
     @RequestMapping("/edit")

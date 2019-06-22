@@ -3,8 +3,10 @@ package com.br.vendas.repoisitory;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import com.br.vendas.model.Cliente;
 
@@ -31,7 +33,7 @@ public class ClienterService {
     @Autowired 
     ICienteRepository repo;
     
-    public void save(Cliente customer) {
+    public void save(@Validated @NonNull Cliente customer) {
         repo.save(customer);
     }
      
