@@ -12,7 +12,11 @@
     <spring.version>5.1.5.RELEASE</spring.version>
     <hibernate.version>5.4.1.Final</hibernate.version> 
     <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
+  
   
   <dependencies>
   	<!-- Specify the following dependency for the core of Spring framework: -->
@@ -86,6 +90,47 @@
 	    <artifactId>gson</artifactId>
 	    <version>2.8.5</version>
 	</dependency>
+	
+	<!--  
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt</artifactId>
+		<version>0.7.0</version>
+	</dependency>
+	
+	-->
+	
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+
+     <dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-hateoas</artifactId>
+		<version>1.2.2.RELEASE</version>
+	</dependency>
+	
+	
 	
 	<!-- dependencias so spring boot -->
   </dependencies>
