@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,7 @@ import com.br.vendas.model.Cliente;
 @RestController
 @RequestMapping("/cliente")//liink de uso : http://localhost:8080/SpringMVCSpringDataJPA/cliente
 @CrossOrigin(origins="*")
+@Service
 public class ClienteRestService {
 
 	@Autowired
@@ -39,19 +41,20 @@ public class ClienteRestService {
 //		return json;
 //	}
 	
+	//Exemplo de URL para listar http://localhost:8080/SpringMVCSpringDataJPA/cliente/listar
+	//teve que adicionar o valor para mapear o metodo e diferenciar de outros devido comflito
 	//@GetMapping(produces="application/json")
-	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Iterable<Cliente> listaCliente(){
+	@RequestMapping(value = "/listar", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody Iterable<Cliente> listarClientes(){
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>llistar");
 		Iterable<Cliente> listaEventos = service.findAll();
 		
 		return listaEventos;
 	}
 	
-	
+	//exemplo de url para uso http://localhost:8080/SpringMVCSpringDataJPA/cliente
     //@PostMapping(produces="application/json")
-	//@RequestMapping(value = "/save", produces = "application/json", method = RequestMethod.POST)
-	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody Cliente inserirCliente(@Valid @RequestBody Cliente cliente) {
 		
 		System.out.println(">>>>>>>>>>>>>>>dentro do save: " + cliente);
@@ -64,7 +67,6 @@ public class ClienteRestService {
 	
 	@RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String excluirCliente(@RequestBody Cliente cliente) {
-		
 		System.out.println(">>>>>>>>>>>>>>>dentro do excluirCliente<<<<<<<<<<<<<<<< ");
 		service.delete(cliente);
 		return "Sucesso";
